@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HABESHA Roleplay - Stream Overlay Studio & Links</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070a12;
+      --card-bg: #0d1322;
+      --card-border: #1a233a;
+      --accent-cyan: #00d2ff;
+      --accent-blue: #0077ff;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Outfit', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* TOP NAVBAR */
+    header {
+      background: rgba(13, 19, 34, 0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--card-border);
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-pill {
+      background: linear-gradient(135deg, #0284c7, #00d2ff);
+      color: #031022;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 4px 8px;
+      border-radius: 6px;
+      letter-spacing: 0.05em;
+    }
+    .brand h1 {
+      font-size: 19px;
+      font-weight: 800;
+      background: linear-gradient(90deg, #ffffff, #38bdf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header-links {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .nav-btn {
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--card-border);
+      background: #111827;
+      color: var(--text);
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .nav-btn:hover {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+    }
+    .nav-btn.primary {
+      background: linear-gradient(135deg, #0284c7, #00d2ff);
+      color: #031022;
+      border: none;
+      box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
+    }
+    .nav-btn.primary:hover {
+      box-shadow: 0 0 30px rgba(0, 210, 255, 0.7);
+      transform: translateY(-1px);
+    }
+
+    /* MAIN CONTAINER */
+    .main-layout {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 32px 24px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 32px;
+    }
+    @media (max-width: 1024px) {
+      .main-layout { grid-template-columns: 1fr; }
+    }
+
+    /* LEFT STAGE: PREVIEW & CUSTOMIZATIONS */
+    .stage-section {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .preview-card {
+      background: #090e1b;
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    }
+
+    .preview-toolbar {
+      background: rgba(13, 19, 34, 0.95);
+      border-bottom: 1px solid var(--card-border);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+    }
+
+    .bg-toggles {
+      display: flex;
+      gap: 6px;
+    }
+    .bg-btn {
+      padding: 4px 10px;
+      background: #111a2f;
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .bg-btn.active {
+      background: var(--accent-cyan);
+      color: #031022;
+      border-color: var(--accent-cyan);
+    }
+
+    .preview-stage {
+      height: 380px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000000;
+      transition: background 0.3s;
+      overflow: hidden;
+    }
+    .preview-stage.mode-checker {
+      background-color: #0a0e17;
+      background-image: linear-gradient(45deg, #121824 25%, transparent 25%), linear-gradient(-45deg, #121824 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #121824 75%), linear-gradient(-45deg, transparent 75%, #121824 75%);
+      background-size: 20px 20px;
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    }
+    .preview-stage.mode-game {
+      background: linear-gradient(180deg, rgba(5,10,20,0.85) 0%, rgba(5,10,20,0.4) 50%, rgba(5,10,20,0.9) 100%), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80') center/cover;
+    }
+
+    .preview-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: transparent;
+      pointer-events: none;
+    }
+
+    /* ANIMATION STYLES SELECTOR (5 STYLES) */
+    .section-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .style-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+
+    .style-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .style-card:hover {
+      border-color: rgba(0, 210, 255, 0.5);
+      transform: translateY(-2px);
+    }
+    .style-card.active {
+      border-color: var(--accent-cyan);
+      background: rgba(0, 210, 255, 0.08);
+      box-shadow: 0 0 20px rgba(0, 210, 255, 0.2);
+    }
+    .style-badge {
+      font-size: 18px;
+    }
+    .style-name {
+      font-size: 14px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+    .style-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* CUSTOMIZATIONS BAR */
+    .controls-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 18px 20px;
+    }
+    .control-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .control-item label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .select-input {
+      background: #070a12;
+      border: 1px solid var(--card-border);
+      color: #ffffff;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      outline: none;
+      font-family: inherit;
+    }
+    .select-input:focus { border-color: var(--accent-cyan); }
+
+    /* RIGHT PANEL: THE 3 TIKTOK LINKS */
+    .links-section {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .link-box-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+    .link-box-card:hover {
+      border-color: rgba(0, 210, 255, 0.4);
+    }
+    .link-box-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .link-tag {
+      font-size: 11px;
+      font-weight: 900;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(0, 210, 255, 0.15);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(0, 210, 255, 0.3);
+    }
+    .link-box-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+    .link-box-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .code-display {
+      background: #050811;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: #38bdf8;
+      word-break: break-all;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .copy-btn {
+      background: linear-gradient(135deg, #0284c7, #00d2ff);
+      color: #031022;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+    .copy-btn:hover {
+      box-shadow: 0 0 16px rgba(0, 210, 255, 0.6);
+      transform: translateY(-1px);
+    }
+
+    /* SETUP INSTRUCTIONS CARD */
+    .instruction-card {
+      background: #090e1b;
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .instruction-step {
+      display: flex;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .step-number {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--accent-cyan);
+      color: #031022;
+      font-size: 11px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* TOAST NOTIFICATION */
+    #toast {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: #0284c7;
+      color: #ffffff;
+      padding: 12px 22px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 0 10px 30px rgba(0, 210, 255, 0.5);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    #toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <span class="brand-pill">TIKTOK OVERLAY</span>
+      <h1>HABESHA Roleplay Studio</h1>
+    </div>
+    <div class="header-links">
+      <button class="nav-btn" onclick="testFullscreen()">
+        🖥️ Fullscreen Preview
+      </button>
+      <a href="https://github.com/Nezafilm" target="_blank" class="nav-btn primary">
+        ⭐ GitHub Repository
+      </a>
+    </div>
+  </header>
+
+  <div class="main-layout">
+    <!-- LEFT: PREVIEW & CUSTOMIZATIONS -->
+    <div class="stage-section">
+      
+      <!-- LIVE STAGE -->
+      <div class="preview-card">
+        <div class="preview-toolbar">
+          <div style="font-weight: 700; color: #ffffff; display: flex; align-items: center; gap: 8px;">
+            <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#00e5ff; box-shadow:0 0 8px #00e5ff;" class="pulse"></span>
+            LIVE OVERLAY PREVIEW
+          </div>
+          <div class="bg-toggles">
+            <span style="font-size: 11px; color: var(--text-muted); margin-right: 6px; align-self: center;">Stage BG:</span>
+            <button class="bg-btn active" onclick="setStageBg('black', this)">Dark Black</button>
+            <button class="bg-btn" onclick="setStageBg('checker', this)">Transparent</button>
+            <button class="bg-btn" onclick="setStageBg('game', this)">GTA Gameplay</button>
+          </div>
+        </div>
+
+        <div class="preview-stage" id="stage-box">
+          <iframe id="preview-frame" src="overlay.html?layout=logo&style=diamond" class="preview-iframe"></iframe>
+        </div>
+      </div>
+
+      <!-- 5 ANIMATION STYLES -->
+      <div>
+        <div class="section-title">
+          <span>✨</span> Select Animation Style (5 Styles Available)
+        </div>
+        <div class="style-grid">
+          <!-- Style 1 -->
+          <div class="style-card active" onclick="setStyle('diamond', this)">
+            <span class="style-badge">💎</span>
+            <div class="style-name">Diamond Chrome</div>
+            <div class="style-desc">Diagonal specular sheen sweep with synchronized starburst glints.</div>
+          </div>
+          <!-- Style 2 -->
+          <div class="style-card" onclick="setStyle('pulse', this)">
+            <span class="style-badge">⚡</span>
+            <div class="style-name">Electric Pulse</div>
+            <div class="style-desc">Heartbeat neon cyan energy surge with deep glowing auras.</div>
+          </div>
+          <!-- Style 3 -->
+          <div class="style-card" onclick="setStyle('wave', this)">
+            <span class="style-badge">🌊</span>
+            <div class="style-name">Liquid Chrome</div>
+            <div class="style-desc">Continuous flowing metallic ripple caustics across the 3D curves.</div>
+          </div>
+          <!-- Style 4 -->
+          <div class="style-card" onclick="setStyle('glitch', this)">
+            <span class="style-badge">👾</span>
+            <div class="style-name">Cyber Glitch</div>
+            <div class="style-desc">Futuristic hologram twitch with RGB chromatic shift and strobe spikes.</div>
+          </div>
+          <!-- Style 5 -->
+          <div class="style-card" onclick="setStyle('zenith', this)">
+            <span class="style-badge">🌌</span>
+            <div class="style-name">Zenith Minimal</div>
+            <div class="style-desc">Slow-motion executive glass glide with subtle ambient backlight.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CUSTOMIZATION CONTROLS -->
+      <div class="controls-row">
+        <div class="control-item">
+          <label>Floating Motion</label>
+          <select class="select-input" id="opt-float" onchange="updateAllUrls()">
+            <option value="true" selected>Floating Levitation (ON)</option>
+            <option value="false">Locked Stationary (OFF)</option>
+          </select>
+        </div>
+        <div class="control-item">
+          <label>Animation Speed</label>
+          <select class="select-input" id="opt-speed" onchange="updateAllUrls()">
+            <option value="normal" selected>Normal (Smooth 3.5s)</option>
+            <option value="fast">Fast (Dynamic 2.2s)</option>
+            <option value="slow">Slow (Gentle 5.5s)</option>
+          </select>
+        </div>
+        <div class="control-item">
+          <label>Glow Intensity</label>
+          <select class="select-input" id="opt-glow" onchange="updateAllUrls()">
+            <option value="normal" selected>Balanced Neon (Default)</option>
+            <option value="hyper">Hyper Blinding Neon</option>
+            <option value="subtle">Subtle Soft Aura</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: THE 3 TIKTOK STREAM LINKS -->
+    <div class="links-section">
+      <div style="font-size: 18px; font-weight: 800; color: #ffffff;">
+        🔗 3 Stream Links for TikTok
+      </div>
+
+      <!-- LINK 1: PURE SHINING LOGO -->
+      <div class="link-box-card">
+        <div class="link-box-header">
+          <span class="link-tag">LINK 1 (POPULAR)</span>
+          <div class="link-box-title">Pure Shining Logo</div>
+        </div>
+        <p class="link-box-desc">
+          Only the animated logo with 100% transparent background. Place it anywhere (e.g. right below your FiveM game screen!).
+        </p>
+        <div class="code-display">
+          <span id="link-1-display">logo.html</span>
+          <button class="copy-btn" onclick="copyLink(1)">
+            📋 COPY LINK
+          </button>
+        </div>
+      </div>
+
+      <!-- LINK 2: MIDDLE DIVIDER BAR -->
+      <div class="link-box-card">
+        <div class="link-box-header">
+          <span class="link-tag">LINK 2</span>
+          <div class="link-box-title">Middle Divider Laser Bar</div>
+        </div>
+        <p class="link-box-desc">
+          Logo flanked by horizontal cyan laser rails that seamlessly mask the transition between your Camera and Game.
+        </p>
+        <div class="code-display">
+          <span id="link-2-display">divider.html</span>
+          <button class="copy-btn" onclick="copyLink(2)">
+            📋 COPY LINK
+          </button>
+        </div>
+      </div>
+
+      <!-- LINK 3: CYBER GAMING HUD -->
+      <div class="link-box-card">
+        <div class="link-box-header">
+          <span class="link-tag">LINK 3</span>
+          <div class="link-box-title">Cyber Gaming HUD Badge</div>
+        </div>
+        <p class="link-box-desc">
+          Framed logo with futuristic glowing corner brackets, dark glass plate, and live status indicator.
+        </p>
+        <div class="code-display">
+          <span id="link-3-display">hud.html</span>
+          <button class="copy-btn" onclick="copyLink(3)">
+            📋 COPY LINK
+          </button>
+        </div>
+      </div>
+
+      <!-- QUICK INSTRUCTION GUIDE -->
+      <div class="instruction-card">
+        <div style="font-size: 14px; font-weight: 800; color: #ffffff;">How to Use in TikTok LIVE Studio</div>
+        <div class="instruction-step">
+          <div class="step-number">1</div>
+          <div>Click <b>COPY LINK</b> on any of the 3 links above.</div>
+        </div>
+        <div class="instruction-step">
+          <div class="step-number">2</div>
+          <div>In TikTok LIVE Studio, click <b>Add source</b> &rarr; choose <b>Link</b>.</div>
+        </div>
+        <div class="instruction-step">
+          <div class="step-number">3</div>
+          <div>Paste the link into the URL field. Set Width: <b>1080</b>, Height: <b>500</b>. Click <b>Add source</b>.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="toast">Copied to clipboard! 📋</div>
+
+  <script>
+    let currentStyle = 'diamond';
+    let currentLayout = 'logo';
+
+    function setStageBg(bg, btn) {
+      const stage = document.getElementById('stage-box');
+      stage.className = 'preview-stage mode-' + bg;
+      document.querySelectorAll('.bg-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    function setStyle(style, card) {
+      currentStyle = style;
+      document.querySelectorAll('.style-card').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+      updateAllUrls();
+    }
+
+    function getQueryString() {
+      const isFloat = document.getElementById('opt-float').value;
+      const speed = document.getElementById('opt-speed').value;
+      const glow = document.getElementById('opt-glow').value;
+
+      return '?style=' + currentStyle + 
+             '&float=' + isFloat + 
+             '&speed=' + speed + 
+             '&glow=' + glow;
+    }
+
+    function getBaseUrl() {
+      const origin = window.location.origin;
+      const pathname = window.location.pathname.replace('index.html', '');
+      return origin + pathname;
+    }
+
+    function updateAllUrls() {
+      const q = getQueryString();
+      const base = getBaseUrl();
+
+      // Update Preview Iframe
+      document.getElementById('preview-frame').src = 'overlay.html' + q + '&layout=' + currentLayout;
+
+      // Update Link 1 (Logo)
+      const link1 = (base.startsWith('http') ? base : '') + 'logo.html' + q;
+      document.getElementById('link-1-display').textContent = link1;
+
+      // Update Link 2 (Divider)
+      const link2 = (base.startsWith('http') ? base : '') + 'divider.html' + q;
+      document.getElementById('link-2-display').textContent = link2;
+
+      // Update Link 3 (HUD)
+      const link3 = (base.startsWith('http') ? base : '') + 'hud.html' + q;
+      document.getElementById('link-3-display').textContent = link3;
+    }
+
+    function copyLink(num) {
+      const el = document.getElementById('link-' + num + '-display');
+      const text = el.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('Link ' + num + ' copied to clipboard! 📋');
+      }).catch(() => {
+        showToast('Copied: ' + text);
+      });
+
+      // Update stage layout to preview the clicked link
+      if (num === 1) currentLayout = 'logo';
+      if (num === 2) currentLayout = 'divider';
+      if (num === 3) currentLayout = 'hud';
+      updateAllUrls();
+    }
+
+    function testFullscreen() {
+      const q = getQueryString();
+      window.open('overlay.html' + q + '&layout=' + currentLayout, '_blank');
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2400);
+    }
+
+    updateAllUrls();
+  </script>
+</body>
+</html>
