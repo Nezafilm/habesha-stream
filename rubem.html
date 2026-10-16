@@ -17,7 +17,7 @@
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
 
-    /* THEME VARIABLES (DYNAMIC PER LOGO) */
+    /* THEME DEFAULTS: HABESHA (CYAN & ICE BLUE) */
     :root {
       --speed-mult: 1;
       --glow-color: #00d2ff;
@@ -28,7 +28,7 @@
       --glow-spread: 28px;
     }
 
-    /* THEME: RUBEM (CRIMSON RED & PURE WHITE) */
+    /* THEME: RUBEM (CRIMSON RED & WHITE) */
     body.theme-rubem {
       --glow-color: #ff1e44;
       --glow-secondary: #ff0033;
@@ -38,7 +38,7 @@
       --glow-spread: 32px;
     }
 
-    /* THEME: FART TOGETHER (TOXIC LIME & COMIC ORANGE) */
+    /* THEME: FART TOGETHER (TOXIC LIME & ORANGE) */
     body.theme-fart {
       --glow-color: #39ff14;
       --glow-secondary: #ff6b00;
@@ -46,6 +46,16 @@
       --rail-bg: rgba(57, 255, 20, 0.9);
       --sheen-tint: rgba(230, 255, 0, 0.9);
       --glow-spread: 30px;
+    }
+
+    /* THEME: RIVER DRIFT (GOLDEN AMBER & SUNLIT TIMBER) */
+    body.theme-river {
+      --glow-color: #ff9900;
+      --glow-secondary: #ff5500;
+      --glow-bright: #ffe680;
+      --rail-bg: rgba(255, 153, 0, 0.9);
+      --sheen-tint: rgba(255, 230, 150, 0.95);
+      --glow-spread: 32px;
     }
 
     .viewport {
@@ -215,10 +225,11 @@
       z-index: 2;
     }
 
-    /* Set mask image per logo */
+    /* Mask images per logo */
     body.logo-habesha .sheen-mask { -webkit-mask-image: url('logo.png'); mask-image: url('logo.png'); }
     body.logo-rubem .sheen-mask { -webkit-mask-image: url('rubem.png'); mask-image: url('rubem.png'); }
     body.logo-fart .sheen-mask { -webkit-mask-image: url('fart.png'); mask-image: url('fart.png'); }
+    body.logo-river .sheen-mask { -webkit-mask-image: url('river.png'); mask-image: url('river.png'); }
 
     /* =======================================================
        THE 5 ANIMATION STYLES
@@ -284,7 +295,7 @@
       animation: sweepMove calc(2.2s * var(--speed-mult)) ease-in-out infinite;
     }
 
-    /* STYLE 3: LIQUID CHROME WAVE */
+    /* STYLE 3: LIQUID CHROME WAVE / RIVER WAVE */
     .anim-wave .logo-container {
       animation: floatSmooth calc(4s * var(--speed-mult)) ease-in-out infinite;
       filter: drop-shadow(0 0 18px var(--glow-color)) drop-shadow(0 0 40px var(--glow-secondary));
@@ -369,7 +380,6 @@
       animation: sweepMove calc(6s * var(--speed-mult)) cubic-bezier(0.4, 0, 0.2, 1) infinite;
     }
 
-    /* COMMON ANIMATIONS */
     @keyframes sweepMove {
       0% { left: -120%; opacity: 0; }
       10% { opacity: 1; }
@@ -482,21 +492,25 @@
   <script>
     const params = new URLSearchParams(window.location.search);
 
-    // 1. SELECT LOGO: habesha (default), rubem, fart
+    // 1. SELECT LOGO: habesha (default), rubem, fart, river
     const logoParam = (params.get('logo') || 'rubem').toLowerCase();
     let logoSrc = 'logo.png';
     let hudLabel = 'HABESHA ROLEPLAY';
 
+    document.body.classList.remove('logo-habesha', 'theme-habesha', 'logo-rubem', 'theme-rubem', 'logo-fart', 'theme-fart', 'logo-river', 'theme-river');
+
     if (logoParam === 'rubem') {
       logoSrc = 'rubem.png';
       hudLabel = 'RUBEM ESPORTS';
-      document.body.classList.remove('logo-habesha', 'theme-habesha');
       document.body.classList.add('logo-rubem', 'theme-rubem');
     } else if (logoParam === 'fart') {
       logoSrc = 'fart.png';
       hudLabel = 'FART TOGETHER';
-      document.body.classList.remove('logo-habesha', 'theme-habesha');
       document.body.classList.add('logo-fart', 'theme-fart');
+    } else if (logoParam === 'river') {
+      logoSrc = 'river.png';
+      hudLabel = 'RIVER DRIFT';
+      document.body.classList.add('logo-river', 'theme-river');
     } else {
       document.body.classList.add('logo-habesha', 'theme-habesha');
     }

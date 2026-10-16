@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stream Overlay Studio - Multi-Logo Suite</title>
+  <title>Stream Overlay Studio - 4 Logos Suite</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
@@ -113,7 +113,7 @@
       gap: 20px;
     }
 
-    /* LOGO SELECTION BAR (3 LOGOS) */
+    /* LOGO SELECTION BAR (4 LOGOS) */
     .logo-select-banner {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
@@ -135,14 +135,18 @@
     }
     .logo-cards-row {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 12px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
     }
+    @media (max-width: 768px) {
+      .logo-cards-row { grid-template-columns: 1fr 1fr; }
+    }
+
     .logo-card-btn {
       background: #070a12;
       border: 1.5px solid var(--card-border);
       border-radius: 12px;
-      padding: 10px 14px;
+      padding: 10px 12px;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -169,22 +173,16 @@
       background: rgba(57, 255, 20, 0.1);
       box-shadow: 0 0 20px rgba(57, 255, 20, 0.25);
     }
-    .logo-icon {
-      font-size: 22px;
+    .logo-card-btn.active.river-active {
+      border-color: #ff9900;
+      background: rgba(255, 153, 0, 0.12);
+      box-shadow: 0 0 20px rgba(255, 153, 0, 0.3);
     }
-    .logo-card-text {
-      display: flex;
-      flex-direction: column;
-    }
-    .logo-card-name {
-      font-size: 13px;
-      font-weight: 800;
-      color: #ffffff;
-    }
-    .logo-card-tag {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
+
+    .logo-icon { font-size: 20px; }
+    .logo-card-text { display: flex; flex-direction: column; }
+    .logo-card-name { font-size: 12px; font-weight: 800; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .logo-card-tag { font-size: 10px; color: var(--text-muted); }
 
     /* PREVIEW STAGE */
     .preview-card {
@@ -398,8 +396,8 @@
 <body>
   <header>
     <div class="brand">
-      <span class="brand-pill">MULTI-LOGO</span>
-      <h1>TikTok Stream Overlay Suite</h1>
+      <span class="brand-pill">4 LOGOS SUITE</span>
+      <h1>TikTok Stream Overlay Studio</h1>
     </div>
     <div class="header-links">
       <button class="nav-btn" onclick="testFullscreen()">
@@ -414,7 +412,7 @@
   <div class="main-layout">
     <div class="stage-section">
       
-      <!-- LOGO SELECTION BAR -->
+      <!-- LOGO SELECTION BAR (4 LOGOS) -->
       <div class="logo-select-banner">
         <div class="logo-select-title">
           <span>🎯</span> Step 1: Choose Stream Logo
@@ -442,6 +440,14 @@
             <div class="logo-card-text">
               <span class="logo-card-name">FART TOGETHER</span>
               <span class="logo-card-tag">Comic 3D Lime</span>
+            </div>
+          </button>
+          <!-- Logo 4: River Drift -->
+          <button class="logo-card-btn" id="btn-logo-river" onclick="selectLogo('river')">
+            <span class="logo-icon">🪵</span>
+            <div class="logo-card-text">
+              <span class="logo-card-name">RIVER DRIFT</span>
+              <span class="logo-card-tag">Timber Amber Raft</span>
             </div>
           </button>
         </div>
@@ -485,7 +491,7 @@
           </div>
           <div class="style-card" onclick="setStyle('wave', this)">
             <span class="style-badge">🌊</span>
-            <div class="style-name">Liquid Chrome</div>
+            <div class="style-name">Liquid Chrome Wave</div>
             <div class="style-desc">Undulating metallic liquid caustics flowing across the letters.</div>
           </div>
           <div class="style-card" onclick="setStyle('glitch', this)">
@@ -611,12 +617,13 @@
     function selectLogo(l) {
       currentLogo = l;
       document.querySelectorAll('.logo-card-btn').forEach(b => {
-        b.classList.remove('active', 'rubem-active', 'fart-active');
+        b.classList.remove('active', 'rubem-active', 'fart-active', 'river-active');
       });
       const btn = document.getElementById('btn-logo-' + l);
       btn.classList.add('active');
       if (l === 'rubem') btn.classList.add('rubem-active');
       if (l === 'fart') btn.classList.add('fart-active');
+      if (l === 'river') btn.classList.add('river-active');
       updateAllUrls();
     }
 
