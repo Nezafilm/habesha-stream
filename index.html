@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stream Overlay Studio - Multi-Logo Suite</title>
+  <title>Stream Overlay Studio - 4 Logos Suite</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
@@ -164,9 +164,9 @@
       box-shadow: 0 0 20px rgba(0, 210, 255, 0.25);
     }
     .logo-card-btn.active.rubem-active {
-      border-color: #ff1e44;
-      background: rgba(255, 30, 68, 0.12);
-      box-shadow: 0 0 20px rgba(255, 30, 68, 0.3);
+      border-color: #ff8800;
+      background: rgba(255, 136, 0, 0.12);
+      box-shadow: 0 0 20px rgba(255, 136, 0, 0.35);
     }
     .logo-card-btn.active.fart-active {
       border-color: #39ff14;
@@ -245,7 +245,7 @@
       pointer-events: none;
     }
 
-    /* 7 ANIMATION STYLES (NOW INCLUDES 3D ROLL & BARREL) */
+    /* 5 ANIMATION STYLES */
     .section-title {
       font-size: 15px;
       font-weight: 800;
@@ -257,7 +257,7 @@
     }
     .style-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 12px;
     }
     .style-card {
@@ -270,7 +270,6 @@
       flex-direction: column;
       gap: 6px;
       transition: all 0.2s ease;
-      position: relative;
     }
     .style-card:hover {
       border-color: rgba(255, 255, 255, 0.4);
@@ -284,18 +283,6 @@
     .style-badge { font-size: 18px; }
     .style-name { font-size: 13px; font-weight: 800; color: #ffffff; }
     .style-desc { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
-    .new-tag {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      font-size: 9px;
-      font-weight: 900;
-      padding: 2px 6px;
-      border-radius: 4px;
-      background: #00e5ff;
-      color: #031022;
-      letter-spacing: 0.05em;
-    }
 
     /* CONTROLS */
     .controls-row {
@@ -431,6 +418,7 @@
           <span>🎯</span> Step 1: Choose Stream Logo
         </div>
         <div class="logo-cards-row">
+          <!-- Logo 1: Habesha -->
           <button class="logo-card-btn active" id="btn-logo-habesha" onclick="selectLogo('habesha')">
             <span class="logo-icon">👑</span>
             <div class="logo-card-text">
@@ -438,13 +426,15 @@
               <span class="logo-card-tag">3D Blue Chrome</span>
             </div>
           </button>
+          <!-- Logo 2: Rubem -->
           <button class="logo-card-btn" id="btn-logo-rubem" onclick="selectLogo('rubem')">
-            <span class="logo-icon">⚔️</span>
+            <span class="logo-icon">👑</span>
             <div class="logo-card-text">
               <span class="logo-card-name">RUBEM</span>
-              <span class="logo-card-tag">Crimson Esports</span>
+              <span class="logo-card-tag">Fiery Gold 3D</span>
             </div>
           </button>
+          <!-- Logo 3: Fart Together -->
           <button class="logo-card-btn" id="btn-logo-fart" onclick="selectLogo('fart')">
             <span class="logo-icon">🎈</span>
             <div class="logo-card-text">
@@ -452,6 +442,7 @@
               <span class="logo-card-tag">Comic 3D Lime</span>
             </div>
           </button>
+          <!-- Logo 4: River Drift -->
           <button class="logo-card-btn" id="btn-logo-river" onclick="selectLogo('river')">
             <span class="logo-icon">🪵</span>
             <div class="logo-card-text">
@@ -478,55 +469,36 @@
         </div>
 
         <div class="preview-stage" id="stage-box">
-          <iframe id="preview-frame" src="overlay.html?logo=habesha&layout=logo&style=roll" class="preview-iframe"></iframe>
+          <iframe id="preview-frame" src="overlay.html?logo=habesha&layout=logo&style=diamond" class="preview-iframe"></iframe>
         </div>
       </div>
 
-      <!-- 7 ANIMATION STYLES (NOW INCLUDES 3D ROLLING) -->
+      <!-- 5 ANIMATION STYLES -->
       <div>
         <div class="section-title">
-          <span>✨</span> Step 2: Select Animation Style (7 Styles Available)
+          <span>✨</span> Step 2: Select Animation Style (5 Styles)
         </div>
         <div class="style-grid">
-          <!-- Style 6: 3D Turntable Roll (NEW!) -->
-          <div class="style-card active" onclick="setStyle('roll', this)">
-            <span class="new-tag">3D ROLL</span>
-            <span class="style-badge">🌪️</span>
-            <div class="style-name">3D Turntable Roll</div>
-            <div class="style-desc">Full 360° 3D coin spin around Y-axis with dynamic depth shadows & flash.</div>
-          </div>
-          <!-- Style 7: 3D Barrel Wave Roll (NEW!) -->
-          <div class="style-card" onclick="setStyle('barrel', this)">
-            <span class="new-tag">3D WAVE</span>
-            <span class="style-badge">🌊</span>
-            <div class="style-name">3D Barrel Wave Roll</div>
-            <div class="style-desc">Continuous 3D rolling wave cylinder tilt keeping text always readable.</div>
-          </div>
-          <!-- Style 1: Diamond Chrome -->
-          <div class="style-card" onclick="setStyle('diamond', this)">
+          <div class="style-card active" onclick="setStyle('diamond', this)">
             <span class="style-badge">💎</span>
             <div class="style-name">Diamond Chrome</div>
             <div class="style-desc">Diagonal specular sheen reflection with timed starburst sparkles.</div>
           </div>
-          <!-- Style 2: Electric Pulse -->
           <div class="style-card" onclick="setStyle('pulse', this)">
             <span class="style-badge">⚡</span>
             <div class="style-name">Electric Pulse</div>
             <div class="style-desc">Heartbeat neon energy surge with radiating power core aura.</div>
           </div>
-          <!-- Style 3: Liquid Chrome Wave -->
           <div class="style-card" onclick="setStyle('wave', this)">
-            <span class="style-badge">🌀</span>
+            <span class="style-badge">🌊</span>
             <div class="style-name">Liquid Chrome Wave</div>
             <div class="style-desc">Undulating metallic liquid caustics flowing across the letters.</div>
           </div>
-          <!-- Style 4: Cyber Glitch -->
           <div class="style-card" onclick="setStyle('glitch', this)">
             <span class="style-badge">👾</span>
             <div class="style-name">Cyber Glitch</div>
             <div class="style-desc">Holographic RGB-split flicker and rapid action strobe flare.</div>
           </div>
-          <!-- Style 5: Zenith Minimal -->
           <div class="style-card" onclick="setStyle('zenith', this)">
             <span class="style-badge">🌌</span>
             <div class="style-name">Zenith Minimal</div>
@@ -639,7 +611,7 @@
 
   <script>
     let currentLogo = 'habesha';
-    let currentStyle = 'roll';
+    let currentStyle = 'diamond';
     let currentLayout = 'logo';
 
     function selectLogo(l) {

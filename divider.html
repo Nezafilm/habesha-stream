@@ -28,13 +28,13 @@
       --glow-spread: 28px;
     }
 
-    /* THEME: RUBEM (CRIMSON RED & WHITE) */
+    /* THEME: RUBEM (FIERY GOLD & EMBER CORE) */
     body.theme-rubem {
-      --glow-color: #ff1e44;
-      --glow-secondary: #ff0033;
-      --glow-bright: #ffffff;
-      --rail-bg: rgba(255, 30, 68, 0.9);
-      --sheen-tint: rgba(255, 100, 120, 0.9);
+      --glow-color: #ff5500;
+      --glow-secondary: #ffaa00;
+      --glow-bright: #ffe680;
+      --rail-bg: rgba(255, 85, 0, 0.9);
+      --sheen-tint: rgba(255, 220, 120, 0.95);
       --glow-spread: 32px;
     }
 
@@ -66,7 +66,6 @@
       align-items: center;
       justify-content: center;
       pointer-events: none;
-      perspective: 1200px;
     }
 
     /* =======================================================
@@ -193,7 +192,6 @@
       width: 90vw;
       max-width: 900px;
       transform-origin: center center;
-      transform-style: preserve-3d;
     }
     body.layout-divider .logo-container {
       width: 480px;
@@ -234,7 +232,7 @@
     body.logo-river .sheen-mask { -webkit-mask-image: url('river.png'); mask-image: url('river.png'); }
 
     /* =======================================================
-       ANIMATION STYLES (NOW 7 STYLES)
+       THE 5 ANIMATION STYLES
        ======================================================= */
 
     /* STYLE 1: DIAMOND CHROME */
@@ -297,7 +295,7 @@
       animation: sweepMove calc(2.2s * var(--speed-mult)) ease-in-out infinite;
     }
 
-    /* STYLE 3: LIQUID CHROME WAVE */
+    /* STYLE 3: LIQUID CHROME WAVE / RIVER WAVE */
     .anim-wave .logo-container {
       animation: floatSmooth calc(4s * var(--speed-mult)) ease-in-out infinite;
       filter: drop-shadow(0 0 18px var(--glow-color)) drop-shadow(0 0 40px var(--glow-secondary));
@@ -382,95 +380,6 @@
       animation: sweepMove calc(6s * var(--speed-mult)) cubic-bezier(0.4, 0, 0.2, 1) infinite;
     }
 
-    /* =======================================================
-       STYLE 6: 3D TURNTABLE ROLL (Full 360 3D Coin Roll) - NEW!
-       ======================================================= */
-    .anim-roll .logo-container {
-      animation: roll3DFull calc(5.2s * var(--speed-mult)) cubic-bezier(0.4, 0, 0.2, 1) infinite;
-    }
-    @keyframes roll3DFull {
-      0% {
-        transform: rotateY(0deg) rotateX(3deg) scale(1);
-        filter: drop-shadow(0 0 18px var(--glow-color)) drop-shadow(0 14px 25px rgba(0,0,0,0.85));
-      }
-      22% {
-        transform: rotateY(90deg) rotateX(7deg) scale(0.92);
-        filter: drop-shadow(-18px 0 25px var(--glow-color)) drop-shadow(0 6px 14px rgba(0,0,0,0.6));
-      }
-      45% {
-        transform: rotateY(180deg) rotateX(3deg) scale(0.95);
-        filter: drop-shadow(0 0 14px var(--glow-color)) drop-shadow(0 10px 20px rgba(0,0,0,0.7));
-      }
-      68% {
-        transform: rotateY(270deg) rotateX(-2deg) scale(0.92);
-        filter: drop-shadow(18px 0 25px var(--glow-color)) drop-shadow(0 6px 14px rgba(0,0,0,0.6));
-      }
-      88% {
-        transform: rotateY(350deg) rotateX(2deg) scale(1.03);
-        filter: drop-shadow(0 0 35px var(--glow-bright)) drop-shadow(0 16px 30px rgba(0,0,0,0.95));
-      }
-      100% {
-        transform: rotateY(360deg) rotateX(3deg) scale(1);
-        filter: drop-shadow(0 0 18px var(--glow-color)) drop-shadow(0 14px 25px rgba(0,0,0,0.85));
-      }
-    }
-    .anim-roll .sheen-mask::after {
-      content: '';
-      position: absolute;
-      top: -60%;
-      left: -120%;
-      width: 50%;
-      height: 220%;
-      background: linear-gradient(
-        110deg,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.3) 20%,
-        rgba(255, 255, 255, 1) 50%,
-        var(--sheen-tint) 70%,
-        rgba(255, 255, 255, 0) 100%
-      );
-      transform: rotate(26deg);
-      filter: blur(1.5px);
-      animation: sweepMove calc(5.2s * var(--speed-mult)) cubic-bezier(0.4, 0, 0.2, 1) infinite;
-    }
-
-    /* =======================================================
-       STYLE 7: 3D BARREL WAVE ROLL (Continuous Rolling Wave) - NEW!
-       ======================================================= */
-    .anim-barrel .logo-container {
-      animation: barrelWaveRoll calc(4.4s * var(--speed-mult)) ease-in-out infinite;
-    }
-    @keyframes barrelWaveRoll {
-      0%, 100% {
-        transform: rotateX(8deg) rotateY(-18deg) rotateZ(-2deg) translateY(0px) scale(1);
-        filter: drop-shadow(-10px 8px 20px var(--glow-color)) drop-shadow(0 12px 25px rgba(0,0,0,0.85));
-      }
-      25% {
-        transform: rotateX(-4deg) rotateY(0deg) rotateZ(1deg) translateY(-8px) scale(1.025);
-        filter: drop-shadow(0 0 30px var(--glow-bright)) drop-shadow(0 16px 30px rgba(0,0,0,0.9));
-      }
-      50% {
-        transform: rotateX(8deg) rotateY(18deg) rotateZ(2deg) translateY(0px) scale(1);
-        filter: drop-shadow(10px 8px 20px var(--glow-color)) drop-shadow(0 12px 25px rgba(0,0,0,0.85));
-      }
-      75% {
-        transform: rotateX(14deg) rotateY(0deg) rotateZ(-1deg) translateY(6px) scale(0.98);
-        filter: drop-shadow(0 4px 18px var(--glow-secondary)) drop-shadow(0 8px 20px rgba(0,0,0,0.8));
-      }
-    }
-    .anim-barrel .sheen-mask::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -100%;
-      width: 45%;
-      height: 200%;
-      background: linear-gradient(110deg, transparent, rgba(255, 255, 255, 0.95), var(--sheen-tint), transparent);
-      transform: rotate(24deg);
-      animation: sweepMove calc(4.4s * var(--speed-mult)) ease-in-out infinite;
-    }
-
-    /* COMMON ANIMATIONS */
     @keyframes sweepMove {
       0% { left: -120%; opacity: 0; }
       10% { opacity: 1; }
@@ -496,7 +405,7 @@
       pointer-events: none;
       z-index: 5;
     }
-    .anim-diamond .glint, .anim-pulse .glint, .anim-glitch .glint, .anim-roll .glint, .anim-barrel .glint {
+    .anim-diamond .glint, .anim-pulse .glint, .anim-glitch .glint {
       display: block;
     }
     .glint::before, .glint::after {
@@ -592,7 +501,7 @@
 
     if (logoParam === 'rubem') {
       logoSrc = 'rubem.png';
-      hudLabel = 'RUBEM ESPORTS';
+      hudLabel = 'RUBEM';
       document.body.classList.add('logo-rubem', 'theme-rubem');
     } else if (logoParam === 'fart') {
       logoSrc = 'fart.png';
@@ -622,7 +531,7 @@
       document.getElementById('hud-wrapper').style.display = 'inline-flex';
     }
 
-    // 3. ANIMATION STYLE: diamond, pulse, wave, glitch, zenith, roll, barrel
+    // 3. ANIMATION STYLE: diamond (default), pulse, wave, glitch, zenith
     const style = params.get('style') || 'diamond';
     document.body.classList.add('anim-' + style);
 
